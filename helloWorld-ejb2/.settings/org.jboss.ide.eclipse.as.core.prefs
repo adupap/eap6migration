@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.jboss.ide.eclipse.as.core.singledeployable.deployableList=EarContent/helloWorld.ear/dist/helloWorld.ear\nEarContent/helloWorld.ear/dist/helloWorld.ear\near/target/jboss-ejb-in-ear.ear\n

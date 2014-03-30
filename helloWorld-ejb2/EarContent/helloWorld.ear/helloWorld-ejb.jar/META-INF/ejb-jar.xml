@@ -1,0 +1,76 @@
+<!DOCTYPE ejb-jar PUBLIC
+	"-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN"
+	"http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<ejb-jar>
+    <enterprise-beans>
+        <session>
+            <ejb-name>Example</ejb-name>                 	
+            <!-- <service-endpoint>examples.interfaces.ExampleWS</service-endpoint> -->
+                        
+            <home>com.jboss.examples.ejb2.ExampleHomeRemote</home> 
+            <remote>com.jboss.examples.ejb2.ExampleRemote</remote>
+            <local-home>com.jboss.examples.ejb2.ExampleLocalHome</local-home>
+            <local>com.jboss.examples.ejb2.ExampleLocal</local>
+            <ejb-class>com.jboss.examples.ejb2.ExampleBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+<!-- 
+			<service-ref>
+				<service-ref-name>service/</service-ref-name>
+			    <service-interface></service-interface>
+                <wsdl-file>META-INF/wsdl/.wsdl</wsdl-file>
+                <jaxrpc-mapping-file>META-INF/mapping.xml</jaxrpc-mapping-file>
+			</service-ref>
+-->
+
+			<resource-ref>
+				<description>DataSource for the database</description>
+                <res-ref-name>jdbc/myPool</res-ref-name>
+                <res-type>javax.sql.DataSource</res-type>
+                <res-auth>Container</res-auth>
+            </resource-ref>
+
+
+<!--
+            <security-role-ref>
+                <role-name>Root</role-name>
+                <role-link>Root</role-link>
+            </security-role-ref>                    
+-->
+        </session>
+        
+	</enterprise-beans>
+
+	<assembly-descriptor>
+
+		<security-role>
+			<role-name>Root</role-name>
+		</security-role>
+
+		<!-- Generic EJB functions -->
+		<method-permission>
+			<unchecked/>
+      <method>
+      	<ejb-name>Example</ejb-name>
+      	<method-name>create</method-name>
+      </method>
+      <method>
+      	<ejb-name>Example</ejb-name>
+        <method-name>remove</method-name>
+      </method>
+      <method>
+      	<ejb-name>Example</ejb-name>
+        <method-name>hello</method-name>
+      </method>
+		</method-permission>
+
+		<container-transaction>
+			<method>
+				<ejb-name>Example</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>NotSupported</trans-attribute>
+		</container-transaction>
+
+ 	</assembly-descriptor>
+</ejb-jar>
